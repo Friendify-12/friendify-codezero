@@ -1,3 +1,4 @@
+import Dashboard from "@/components/Dashboard"
 import Landing from "@/components/Landing"
 import Navbar from "@/components/Navbar"
 import { useEffect, useState } from "react"
@@ -27,7 +28,6 @@ const index = () => {
     //   )}</div>
     // </div>
     <div>
-        {/* <Navbar/> */}
         <Landing/>
     </div>
   )
