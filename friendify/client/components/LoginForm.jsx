@@ -8,7 +8,7 @@ const LoginForm = () => {
             <div className="bg-white p-8 rounded shadow-lg w-96">
                 <h1 className="text-4xl font-bold mb-6 text-center">Login</h1>
                 <p className="text-center mb-6">
-                    Don't have an account?{' '}
+                    Don&apos;t have an account?{' '}
                     <Link href="/register" className="text-[blue] underline">
                         Register here.
                     </Link>
