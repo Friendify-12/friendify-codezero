@@ -7,13 +7,16 @@ app = Flask(__name__)
 # add app instance to cors
 CORS(app)
 
+# ==================================== MODELS ====================================
+
+# ================================= CONTROLLERS =================================
 # have a app route to use api call
 # TODO: display hello world to front end
 @app.route("/api/home", methods=['GET'])
 def return_home():
     return jsonify({
         'message': 'Welcome to the team:',
-        'teamMembers': ['Abrar', 'Daniel', 'Logan', 'Darren', 'Zoe', 'Braxton', 'Xiangen', 'chengchw']
+        'teamMembers': ['Abrar', 'Daniel', 'Logan', 'Zoe', 'Braxton', 'Xiangen', 'chengchw']
 })
 
 # run flask app
