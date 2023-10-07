@@ -4,8 +4,8 @@ import NextJsFlask from "@/components/Next-js-flask"
 const index = () => {
   return (
     <div>
-        {/* <Landing/> */}
-        <NextJsFlask/>
+        <Landing/>
+        {/* <NextJsFlask/> */}
     </div>
   )
 }
