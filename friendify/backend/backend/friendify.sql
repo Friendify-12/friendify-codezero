@@ -26,26 +26,46 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `friendify`.`profiles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `friendify`.`profiles` (
+  `id` INT NOT NULL,
+  `location_zip` VARCHAR(5) NULL,
+  `image` BLOB NULL,
+  `age` INT NULL,
+  `gender` VARCHAR(1) NOT NULL,
+  `bio` VARCHAR(1000) NULL,
+  `created_at` DATETIME GENERATED ALWAYS AS (CURRENT_TIMESTAMP) VIRTUAL,
+  `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `friendify`.`users`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `friendify`.`users` (
   `id` INT NOT NULL,
+  `username` VARCHAR(45) NULL,
   `first_name` VARCHAR(255) NULL,
   `last_name` VARCHAR(255) NULL,
   `email` VARCHAR(255) NULL,
   `password` VARCHAR(256) NULL,
-  `zip` VARCHAR(5) NULL,
-  `age` INT NULL,
-  `gender` VARCHAR(45) NULL,
-  `bio` VARCHAR(1000) NULL,
   `created_at` DATETIME GENERATED ALWAYS AS (CURRENT_TIMESTAMP) VIRTUAL,
   `updated_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `interests_id` INT NOT NULL,
+  `profiles_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_users_interests1_idx` (`interests_id` ASC) VISIBLE,
+  INDEX `fk_users_profiles1_idx` (`profiles_id` ASC) VISIBLE,
   CONSTRAINT `fk_users_interests1`
     FOREIGN KEY (`interests_id`)
     REFERENCES `friendify`.`interests` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_profiles1`
+    FOREIGN KEY (`profiles_id`)
+    REFERENCES `friendify`.`profiles` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -90,23 +110,8 @@ ENGINE = InnoDB;
 -- Table `friendify`.`messages`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `friendify`.`messages` (
-  `users_id` INT NOT NULL,
-  `users_id1` INT NOT NULL,
   `message_title` VARCHAR(45) NULL,
-  `message_body` VARCHAR(1000) NULL,
-  PRIMARY KEY (`users_id`, `users_id1`),
-  INDEX `fk_users_has_users_users2_idx` (`users_id1` ASC) VISIBLE,
-  INDEX `fk_users_has_users_users1_idx` (`users_id` ASC) VISIBLE,
-  CONSTRAINT `fk_users_has_users_users1`
-    FOREIGN KEY (`users_id`)
-    REFERENCES `friendify`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_has_users_users2`
-    FOREIGN KEY (`users_id1`)
-    REFERENCES `friendify`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `message_body` VARCHAR(1000) NULL)
 ENGINE = InnoDB;
 
 
